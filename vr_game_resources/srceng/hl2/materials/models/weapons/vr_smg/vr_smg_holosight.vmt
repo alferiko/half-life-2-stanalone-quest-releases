@@ -1,0 +1,7 @@
+UnlitGeneric
+{
+	$basetexture "models/weapons/vr_smg/vr_smg_holosight"
+	$ignorez 1
+	$model 1
+	$alphatest 1
+}

@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$basetexture"	"models/weapons/vr_rocket_launcher/vr_rocket_launcher_missile"
+	"$surfaceprop"	"metal"
+}

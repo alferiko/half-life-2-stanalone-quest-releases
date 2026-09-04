@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/weapons/vr_smg/vr_smg_grenade"
+	"$surfaceprop" "metal"
+}

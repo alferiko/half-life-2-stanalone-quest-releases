@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$basetexture"		"models/weapons/vr_357/vr_357_shell"
+	"$envmap"		"env_cubemap"
+	"$surfaceprop"		"metal"
+	"$basealphaenvmapmask"	"1"
+	"$envmaptint"		"[0.6 0.5 0.3]"
+	"$model"			"1"
+}

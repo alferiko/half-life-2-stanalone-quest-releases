@@ -1,0 +1,7 @@
+/game_cache/
+/srceng/
+/release-assets/
+*.7z
+.DS_Store
+Thumbs.db
+desktop.ini

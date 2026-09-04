@@ -1,0 +1,15 @@
+"VertexLitGeneric"
+{
+	"$basetexture"			"models/weapons/vr_bugbait/vr_bugbait_inside"
+	"$bumpmap"			"models/weapons/vr_bugbait/vr_bugbait_inside_normal"
+
+	"$envmap"			"env_cubemap"
+//	"$normalmapalphaenvmapmask"	"1"
+	"$envmaptint"			"[0.5 1 0.5]"
+
+	"$phong"				"1"
+	"$phongboost"			"1"
+	"$phongexponent"			"1"
+
+	"$surfaceprop"			"alienflesh"
+}

@@ -1,0 +1,8 @@
+"UnlitGeneric"
+{
+	"$basetexture"	"models/weapons/vr_smg/vr_smg_reflexsight"
+	"$additive"	1
+	"$model"		1
+	"$nocull"		1
+	"$surfaceprop"	"glass"
+}

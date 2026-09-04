@@ -1,0 +1,11 @@
+"vertexlitgeneric"
+{
+	"$basetexture"			"models/weapons/vr_crossbow/vr_crossbow_battery"
+	"$envmap"			"env_cubemap"
+	"$envmaptint"			"[.25 .25 .25]"
+	"$normalmapalphaenvmapmask"	"1"
+	"$phong"				"1"
+	"$phongboost"			"3"
+	"$phongexponent"			"50"
+	"$phongfresnelranges"		"[.1 3 1]"
+}

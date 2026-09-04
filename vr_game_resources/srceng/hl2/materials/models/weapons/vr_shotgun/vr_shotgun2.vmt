@@ -1,0 +1,12 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/weapons/vr_shotgun/vr_shotgun2"
+	"$bumpmap" "models/weapons/vr_shotgun/vr_shotgun2_normal"
+	"$surfaceprop" "metal"
+//	"$selfillum" 1
+	"$phong" "1"
+	"$phongboost" "1"
+	"$phongexponent" 10
+	"$phongalbedotint" "1"								
+	"$phongfresnelranges"	"[.1 5 1]"
+}

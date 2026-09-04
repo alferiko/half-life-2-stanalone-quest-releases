@@ -1,0 +1,14 @@
+"UnlitGeneric"
+{
+	// Quest supplies the same monoscopic scope target as PCVR.  The custom
+	// HLVR_SniperScope shader is unavailable on TOGL/GLES, so alpha-blend the
+	// PCVR reticle over the camera image while drawing the scope glass.  Keeping
+	// both samples in one material makes the reticle independent of render-target
+	// pass ordering on the Android GL backend.
+	"$basetexture"	"_rt_Scope"
+	"$detail"		"models/weapons/vr_crossbow/vr_crossbow_crosshair"
+	"$detailscale"		"1"
+	"$detailblendmode"	"2"
+	"$model"		"1"
+	"$nocull"		"1"
+}

@@ -1,0 +1,13 @@
+"VertexLitGeneric"
+{
+	"$basetexture"		"models/items/vr_irifle_ammo2"
+	"$surfaceprop"		"default"
+	"$selfillum"		"1"
+	"$bumpmap"		"models/items/vr_irifle_ammo2_normal"
+	"$phongwarptexture"	"models/items/vr_irifle_ammo2_warp"
+	"$model"			"1"
+	"$phong"			"1"
+	"$phongboost"		"2"
+	"$phongexponent"		"8"
+	"$phongfresnelranges"	"[.5 1 2]"
+}

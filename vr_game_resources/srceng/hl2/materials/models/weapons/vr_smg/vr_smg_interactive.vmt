@@ -1,0 +1,47 @@
+"UnlitTwoTexture"
+{
+	"$basetexture"		"models/weapons/vr_smg/vr_smg"
+	"$bumpmap"		"models/weapons/vr_smg/vr_smg_normal"
+	"$texture2"		"models/weapons/interactive_highlight"
+	"$texture2scale"		"4"
+	"$surfaceprop"		"metal"
+	"$phong"			"1"
+	"$phongexponent"		"45"
+	"$phongboost"		"2"
+	"$phongfresnelranges"	"[.2 4 1]"
+
+	"Proxies"
+	{
+
+		"Sine"
+		{
+			"resultVar"	"$color[0]"
+			"sineperiod"	"0.75"
+			"sinemin"		"6"
+			"sinemax"	"16"
+		}
+
+		"Sine"
+		{
+			"resultVar"	"$color[1]"
+			"sineperiod"	"0.75"
+			"sinemin"		"6"
+			"sinemax"	"16"
+		}
+
+		"Sine"
+		{
+			"resultVar"	"$color[2]"
+			"sineperiod"	"0.75"
+			"sinemin"		"6"
+			"sinemax"	"16"
+		}
+
+		"TextureScroll"
+		{
+			"texturescrollVar"	"$texture2transform"
+			"texturescrollRate"	".05"
+			"texturescrollAngle"	"90"
+		}
+	}
+}

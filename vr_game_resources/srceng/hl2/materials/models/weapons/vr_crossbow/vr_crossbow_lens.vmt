@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$basetexture"	"models/weapons/vr_crossbow/vr_crossbow_lens"
+	"$translucent"	"1"
+	"$model"		"1"
+}

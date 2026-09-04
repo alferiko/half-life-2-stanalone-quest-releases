@@ -1,0 +1,9 @@
+"Sprite"
+{
+	"$spriteorientation" "vp_parallel"
+	"$spriteorigin" "[ 0.50 0.50 ]"
+	"$basetexture" "sprites/glow04"
+	"$ignorez" "0"
+	"$translucent" "1"
+	"$alpha" "0.3"
+}

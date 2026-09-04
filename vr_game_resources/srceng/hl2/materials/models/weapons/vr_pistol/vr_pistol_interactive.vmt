@@ -1,0 +1,50 @@
+"UnlitTwoTexture"
+{
+	"$basetexture"			"models/weapons/vr_pistol/vr_pistol"
+	"$bumpmap"			"models/weapons/vr_pistol/vr_pistol_normal"
+	"$texture2"			"models/weapons/interactive_highlight"
+	"$envmap"			"env_cubemap"
+	"$envmaptint"			"[0.2 .2 .2]"
+	"$normalmapalphaenvmapmask"	"1"
+	"$phong"				"1"
+	"$phongboost"			"1"
+	"$phongexponent"			"15"
+	"$phongalbedotint"			"1"								
+	"$phongfresnelranges"		"[.1 5 1]"
+	"$surfaceprop"			"metal"
+
+	"Proxies"
+	{
+
+		"Sine"
+		{
+			"resultVar"	"$color[0]"
+			"sineperiod"	"0.75"
+			"sinemin"		"0.8"
+			"sinemax"	"1"
+		}
+
+		"Sine"
+		{
+			"resultVar"	"$color[1]"
+			"sineperiod"	"0.75"
+			"sinemin"		"0.8"
+			"sinemax"	"1"
+		}
+
+		"Sine"
+		{
+			"resultVar"	"$color[2]"
+			"sineperiod"	"0.75"
+			"sinemin"		"0.8"
+			"sinemax"	"1"
+		}
+
+		"TextureScroll"
+		{
+			"texturescrollVar"	"$texture2transform"
+			"texturescrollRate"	".05"
+			"texturescrollAngle"	"90"
+		}
+	}
+}

@@ -1,0 +1,14 @@
+"VertexLitGeneric"
+{
+	"$basetexture"			"models\player\player_diffuse"
+	"$bumpmap"			"models\player\player_normal"
+	"$envmap"			"env_cubemap"
+	"$normalmapalphaenvmapmask"	"1"
+	"$envmaptint" 			"[0.223 0.129 0.063]"
+	"$envmapfresnel"			"1"
+	"$phong"				"1"
+	"$phongexponent"			"8"
+	"$phongboost"			"2"
+	"$phongfresnelranges"		"[0.25 0.75  0.3]"
+	"$phongtint"			"[1 1 1.01]"
+}

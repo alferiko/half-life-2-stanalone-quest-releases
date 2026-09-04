@@ -1,0 +1,8 @@
+UnlitGeneric
+{
+	"$basetexture"	"vgui\hl2vr_logo"
+	"$translucent"	"1" 
+	"$nofog"		"1"
+	"$nocull"		"1"
+	"$ignorez"	"0"
+}

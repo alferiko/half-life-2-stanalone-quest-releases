@@ -1,0 +1,11 @@
+"vertexlitgeneric"
+{
+	"$baseTexture" "models/weapons/vr_grenade/vr_grenade_rim"
+	"$bumpmap" "models/weapons/vr_grenade/vr_grenade_rim_normal"
+	"$surfaceprop" "metal"
+	"$phong" "1"
+	"$phongexponent" "135"
+	"$phongboost"	"11"
+	"$phongfresnelranges"	"[.3 0.4 2]"
+
+}

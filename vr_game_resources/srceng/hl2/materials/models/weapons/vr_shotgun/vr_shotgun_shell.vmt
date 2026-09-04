@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/weapons/vr_shotgun/vr_shotgun_shell"
+	"$surfaceprop" "plastic"
+}

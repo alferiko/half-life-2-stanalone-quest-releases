@@ -1,0 +1,21 @@
+"Unlittwotexture"
+{
+	"$basetexture"	"models/weapons/vr_irifle/vr_irifle_reflexsight"
+	"$texture2"	"models/weapons/vr_irifle/vr_irifle_reflexsight_noise"
+	"$additive"	1
+	"$model"		1
+	"$surfaceprop"	"glass"
+
+	"Proxies"
+	{
+
+		"TextureScroll"
+		{
+			"texturescrollvar" "$texture2transform"
+			"texturescrollrate" 4
+			"texturescrollangle" -50
+		}
+
+
+	}
+}

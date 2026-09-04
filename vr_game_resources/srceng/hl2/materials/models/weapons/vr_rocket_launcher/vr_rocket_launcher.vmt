@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$basetexture"			"models/weapons/vr_rocket_launcher/vr_rocket_launcher"
+	"$bumpmap"			"models/weapons/vr_rocket_launcher/vr_rocket_launcher_normal"
+	"$envmap"			"env_cubemap"
+	"$envmapsaturation"		"0.5"
+	"$surfaceprop"			"metal"
+	"$envmapcontrast"			"1"
+	"$normalmapalphaenvmapmask"	"1"
+}

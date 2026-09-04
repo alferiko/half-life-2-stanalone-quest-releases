@@ -1,0 +1,13 @@
+"UnlitGeneric"
+{
+	// Sprite/orangelight1 is rendered with a dark RGB fringe by the GLES
+	// Sprite shader even when the VMT requests additive blending.  The same
+	// UnlitGeneric + laser1 path used by the corrected RPG beam has clean
+	// additive edges on Quest; BeamSeg supplies the orange vertex colour.
+	"$basetexture" "effects/laser1"
+	"$vertexcolor" 1
+	"$vertexalpha" 1
+	"$additive" 1
+	"$nocull" 1
+	"$ignorez" 0
+}

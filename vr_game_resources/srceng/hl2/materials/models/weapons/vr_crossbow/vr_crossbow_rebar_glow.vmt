@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$basetexture"	"models/weapons/vr_crossbow/vr_crossbow_rebar_glow"
+	"$bumpmap"	"models/weapons/vr_crossbow/vr_crossbow_rebar_normal"
+	"$surfaceprop"	"metal"
+	"$selfillum"	"1"
+}

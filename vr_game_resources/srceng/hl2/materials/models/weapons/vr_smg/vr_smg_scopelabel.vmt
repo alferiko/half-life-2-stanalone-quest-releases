@@ -1,0 +1,7 @@
+"vertexlitgeneric"
+{
+	$basetexture "models/weapons/vr_smg/vr_smg_scopelabel"
+	$translucent 1
+	$model 1
+	$surfaceprop "glass"
+}
