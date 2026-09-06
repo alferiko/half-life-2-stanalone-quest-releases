@@ -4,7 +4,7 @@
 
 An unofficial, free and non-commercial standalone VR port of Half-Life 2 for Meta Quest 3 and Quest 3S. The initial release of this repository is 0.982 and supports Half-Life 2, Lost Coast, Episode One and Episode Two. The original games are not included: you must own and install them legally on Steam.
 
-The repository includes `HL2VR-Standalone-0.982.apk`, the Windows and Linux cache builders in `BUILD_GAME_CACHE.bat`, `BUILD_GAME_CACHE.sh` and `tools/`, plus the complete VR compatibility overlay in `vr_game_resources/`. A clone is therefore sufficient to build the cache. The release archive contains only the APK, builders, documentation and VR resources.
+The repository includes `HL2VR-Standalone-0.983.apk`, the Windows and Linux cache builders in `BUILD_GAME_CACHE.bat`, `BUILD_GAME_CACHE.sh` and `tools/`, plus the complete VR compatibility overlay in `vr_game_resources/`. A clone is therefore sufficient to build the cache. The release archive contains only the APK, builders, documentation and VR resources.
 
 ## Original VR implementation
 
@@ -17,13 +17,13 @@ All code responsible for interaction with the VR world was written from scratch 
 - a USB data cable and authorized USB debugging;
 - Android SDK Platform Tools (`adb`), or another sideloading tool;
 - a legal Steam installation of Half-Life 2; install Episode One and Episode Two too if you want those campaigns;
-- the 0.982 APK from the repository root or release attachments; either clone this repository or download the standalone distribution archive.
+- the 0.983 APK from the repository root or release attachments; either clone this repository or download the standalone distribution archive.
 
 ## Installation
 
 ### 1. Build the legal game cache
 
-1. Clone/download this repository to a writable folder, or extract `HL2VR-Standalone-0.982.7z`. Keep `BUILD_GAME_CACHE.*`, `tools/` and `vr_game_resources/` beside one another.
+1. Clone/download this repository to a writable folder, or extract `HL2VR-Standalone-0.983.7z`. Keep `BUILD_GAME_CACHE.*`, `tools/` and `vr_game_resources/` beside one another.
 2. From the repository/distribution root, run `BUILD_GAME_CACHE.bat` on Windows. On Linux run:
 
    ```bash
@@ -46,7 +46,7 @@ Connect the headset, accept its USB debugging prompt and check the connection:
 
 ```bash
 adb devices
-adb install -r HL2VR-Standalone-0.982.apk
+adb install -r HL2VR-Standalone-0.983.apk
 ```
 
 The `-r` option updates an existing installation without deleting its application data. If Android reports an incompatible signature, back up anything important, uninstall the older package, then install again.
