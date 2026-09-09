@@ -2,6 +2,10 @@
 
 [Русская версия](README.ru.md)
 
+**[Download the latest APK and release files](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest)**
+
+**Supported content:** Half-Life 2 · Lost Coast · Episode One · Episode Two · Portal 1 | **Headsets:** Meta Quest 3 · Meta Quest 3S
+
 An unofficial, free and non-commercial standalone VR port for Meta Quest 3 and Quest 3S. Version 0.985 supports Half-Life 2, Lost Coast, Episode One, Episode Two and Portal 1 in one Android package. The original games are not included: you must own and install them legally on Steam.
 
 The repository includes the Windows and Linux cache builders in `BUILD_GAME_CACHE.bat`, `BUILD_GAME_CACHE.sh` and `tools/`, plus the complete VR compatibility overlay in `vr_game_resources/`. A clone is therefore sufficient to build the shared cache. Download `HL2VR-Standalone-0.985.apk` or the complete archive from the 0.985 release attachments.
