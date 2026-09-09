@@ -14,6 +14,13 @@ The repository includes the Windows and Linux cache builders in `BUILD_GAME_CACH
 
 All code responsible for interaction with the VR world was written from scratch for this project. No code, VR logic or other resources from the PC VR version are used. The only exception is maps and models, which the cache builder takes from the user's legally installed copy of the game; they are not included in this repository or its releases.
 
+## Support development
+
+If you enjoy the project and want to support its development:
+
+- [DonationAlerts — zer0k0](https://www.donationalerts.com/r/zer0k0)
+- Ethereum: `0xB1BFE7788D172aDc4a9E3E80a1D2ad781c95ACff`
+
 ## What you need
 
 - Meta Quest 3 or Quest 3S with Developer Mode enabled;
