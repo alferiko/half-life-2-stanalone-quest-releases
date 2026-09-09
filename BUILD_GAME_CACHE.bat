@@ -1,9 +1,9 @@
 @echo off
 setlocal EnableExtensions
-title Half-Life 2 VR Standalone 0.982 - HL2, Lost Coast and Episodes Cache Builder
+title Half-Life 2 VR Standalone 0.985 - Unified Cache Builder
 
 echo ============================================================
-echo   Half-Life 2 VR Standalone 0.982 - HL2 + Lost Coast + Episodes Cache
+echo   Half-Life 2 VR Standalone 0.985 - HL2 + Episodes + Portal 1
 echo ============================================================
 echo.
 echo This tool uses your legally installed Half-Life 2 files.

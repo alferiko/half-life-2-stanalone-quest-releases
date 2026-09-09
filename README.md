@@ -2,9 +2,9 @@
 
 [Русская версия](README.ru.md)
 
-An unofficial, free and non-commercial standalone VR port of Half-Life 2 for Meta Quest 3 and Quest 3S. The initial release of this repository is 0.982 and supports Half-Life 2, Lost Coast, Episode One and Episode Two. The original games are not included: you must own and install them legally on Steam.
+An unofficial, free and non-commercial standalone VR port for Meta Quest 3 and Quest 3S. Version 0.985 supports Half-Life 2, Lost Coast, Episode One, Episode Two and Portal 1 in one Android package. The original games are not included: you must own and install them legally on Steam.
 
-The repository includes `HL2VR-Standalone-0.983.apk`, the Windows and Linux cache builders in `BUILD_GAME_CACHE.bat`, `BUILD_GAME_CACHE.sh` and `tools/`, plus the complete VR compatibility overlay in `vr_game_resources/`. A clone is therefore sufficient to build the cache. The release archive contains only the APK, builders, documentation and VR resources.
+The repository includes the Windows and Linux cache builders in `BUILD_GAME_CACHE.bat`, `BUILD_GAME_CACHE.sh` and `tools/`, plus the complete VR compatibility overlay in `vr_game_resources/`. A clone is therefore sufficient to build the shared cache. Download `HL2VR-Standalone-0.985.apk` or the complete archive from the 0.985 release attachments.
 
 ## Original VR implementation
 
@@ -17,13 +17,14 @@ All code responsible for interaction with the VR world was written from scratch 
 - a USB data cable and authorized USB debugging;
 - Android SDK Platform Tools (`adb`), or another sideloading tool;
 - a legal Steam installation of Half-Life 2; install Episode One and Episode Two too if you want those campaigns;
-- the 0.983 APK from the repository root or release attachments; either clone this repository or download the standalone distribution archive.
+- a legal Steam installation of Portal if you want Portal 1;
+- the 0.985 APK from the repository root or release attachments; either clone this repository or download the standalone distribution archive.
 
 ## Installation
 
 ### 1. Build the legal game cache
 
-1. Clone/download this repository to a writable folder, or extract `HL2VR-Standalone-0.983.7z`. Keep `BUILD_GAME_CACHE.*`, `tools/` and `vr_game_resources/` beside one another.
+1. Clone/download this repository to a writable folder, or extract `HL2VR-Standalone-0.985.7z`. Keep `BUILD_GAME_CACHE.*`, `tools/` and `vr_game_resources/` beside one another.
 2. From the repository/distribution root, run `BUILD_GAME_CACHE.bat` on Windows. On Linux run:
 
    ```bash
@@ -36,7 +37,7 @@ All code responsible for interaction with the VR world was written from scratch 
    D:\SteamLibrary\steamapps\common\Half-Life 2
    ```
 
-4. If `lostcoast`, `episodic` and `ep2` are installed beside `hl2`, the builder includes them automatically. The result is `game_cache/srceng`.
+4. If `lostcoast`, `episodic` and `ep2` are installed beside `hl2`, the builder includes them automatically. It also finds a sibling `Portal` Steam folder automatically or asks for it; leaving the Portal path blank skips that campaign. Everything is written to the single `game_cache/srceng` tree.
 
 The builder excludes executables, DLLs, saves, logs, personal configuration and every campaign's `custom` folder. It combines your legal game installation with the supplied VR compatibility resources. Python is not required. Linux needs Bash 4+ and GNU coreutils.
 
@@ -46,7 +47,7 @@ Connect the headset, accept its USB debugging prompt and check the connection:
 
 ```bash
 adb devices
-adb install -r HL2VR-Standalone-0.983.apk
+adb install -r HL2VR-Standalone-0.985.apk
 ```
 
 The `-r` option updates an existing installation without deleting its application data. If Android reports an incompatible signature, back up anything important, uninstall the older package, then install again.
@@ -67,6 +68,9 @@ The final headset layout must be:
 /sdcard/srceng/lostcoast/  (only when Lost Coast is installed)
 /sdcard/srceng/episodic/   (only when Episode One is installed)
 /sdcard/srceng/ep2/        (only when Episode Two is installed)
+/sdcard/srceng/portal/     (only when Portal is installed)
+/sdcard/srceng/portal_hl2/ (Portal-owned shared content)
+/sdcard/srceng/portal_platform/
 ```
 
 Start **Half-Life 2 VR Standalone** from the headset's Unknown Sources section. Select the campaign in the launcher and start the game.
@@ -112,7 +116,7 @@ Install a newer APK with `adb install -r`. Version 0.982 performs a one-time res
 - **`unauthorized` in `adb devices`:** put on the headset, accept the computer fingerprint, then reconnect USB.
 - **More than one device:** use `adb -s DEVICE_SERIAL ...` with the serial shown by `adb devices`.
 - **Game returns to the launcher or cannot find content:** verify that the path is exactly `/sdcard/srceng/hl2`, not `/sdcard/srceng/srceng/hl2`.
-- **A campaign is missing:** install it in Steam, run the cache builder again and verify that `lostcoast/gameinfo.txt`, `episodic/gameinfo.txt` or `ep2/gameinfo.txt` exists in the generated cache.
+- **A campaign is missing:** install it in Steam, run the cache builder again and verify that its `gameinfo.txt` exists in the generated cache. For Portal, supply the Steam `Portal` folder when prompted.
 - **Old files cause visual or startup issues:** rebuild a clean cache and replace `/sdcard/srceng` rather than merging directories by hand.
 
 ## Legal notice

@@ -4,11 +4,14 @@ param(
     [string]$GameRoot,
 
     [Parameter(Mandatory = $false)]
-    [string]$OutputRoot
+    [string]$OutputRoot,
+
+    [Parameter(Mandatory = $false)]
+    [string]$PortalRoot
 )
 
 $ErrorActionPreference = 'Stop'
-$PortVersion = '0.982'
+$PortVersion = '0.985'
 $ReleaseRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $OverlayRoot = Join-Path $ReleaseRoot 'vr_game_resources'
 $OverlaySrceng = Join-Path $OverlayRoot 'srceng'
@@ -18,6 +21,9 @@ function Resolve-HL2Root {
     param([Parameter(Mandatory = $true)][string]$Candidate)
 
     $expanded = [Environment]::ExpandEnvironmentVariables($Candidate.Trim().Trim('"'))
+    if ([string]::IsNullOrWhiteSpace($expanded)) {
+        throw 'The Portal path is empty.'
+    }
     if ([string]::IsNullOrWhiteSpace($expanded)) {
         throw 'The Half-Life 2 path is empty.'
     }
@@ -37,6 +43,19 @@ function Resolve-HL2Root {
     }
 
     throw "Not a Half-Life 2 root: $resolved`nExpected hl2\gameinfo.txt and platform\."
+}
+
+function Resolve-PortalRoot {
+    param([Parameter(Mandatory = $true)][string]$Candidate)
+
+    $expanded = [Environment]::ExpandEnvironmentVariables($Candidate.Trim().Trim('"'))
+    $resolved = [IO.Path]::GetFullPath($expanded)
+    if ((Test-Path -LiteralPath (Join-Path $resolved 'portal\gameinfo.txt') -PathType Leaf) -and
+        (Test-Path -LiteralPath (Join-Path $resolved 'hl2') -PathType Container) -and
+        (Test-Path -LiteralPath (Join-Path $resolved 'platform') -PathType Container)) {
+        return $resolved.TrimEnd('\')
+    }
+    throw "Not a Portal root: $resolved`nExpected portal\gameinfo.txt, hl2 and platform."
 }
 
 function Invoke-RobocopyPackage {
@@ -158,9 +177,51 @@ function Enable-VRSupport {
     [IO.File]::WriteAllText($GameInfo, $text, [Text.UTF8Encoding]::new($false))
 }
 
+function Set-PortalGameInfo {
+    param([Parameter(Mandatory = $true)][string]$GameInfo)
+
+    $text = @'
+"GameInfo"
+{
+    game "Portal"
+    title "Portal"
+    type singleplayer_only
+    nodifficulty 1
+    hasportals 1
+    supportsvr 1
+    FileSystem
+    {
+        SteamAppId 400
+        SearchPaths
+        {
+            game+mod "portal/custom/*"
+            game "hl2/custom/*"
+            game+mod "portal/portal_sound_vo_russian.vpk"
+            game+mod "portal/portal_sound_vo_english.vpk"
+            game+mod "portal/portal_pak.vpk"
+            game "portal_hl2/hl2_textures.vpk"
+            game "portal_hl2/hl2_sound_vo_russian.vpk"
+            game "portal_hl2/hl2_sound_vo_english.vpk"
+            game "portal_hl2/hl2_sound_misc.vpk"
+            game "portal_hl2/hl2_misc.vpk"
+            platform "portal_platform/platform_misc.vpk"
+            mod+mod_write+default_write_path "|gameinfo_path|."
+            game+game_write "portal"
+            gamebin "portal/bin"
+            game "portal_hl2"
+            game "hl2"
+            platform "portal_platform"
+            platform "platform"
+        }
+    }
+}
+'@
+    [IO.File]::WriteAllText($GameInfo, $text + "`n", [Text.UTF8Encoding]::new($false))
+}
+
 try {
-    Write-Host 'Half-Life 2 VR Standalone 0.982' -ForegroundColor Yellow
-    Write-Host 'The source must be a legal Half-Life 2 installation.'
+    Write-Host 'Half-Life 2 VR Standalone 0.985' -ForegroundColor Yellow
+    Write-Host 'The sources must be legal Half-Life 2 and optional Portal installations.'
     Write-Host ''
 
     if ([string]::IsNullOrWhiteSpace($GameRoot)) {
@@ -168,14 +229,30 @@ try {
     }
     $GameRoot = Resolve-HL2Root -Candidate $GameRoot
 
+    if ([string]::IsNullOrWhiteSpace($PortalRoot)) {
+        $autoPortal = Join-Path (Split-Path -Parent $GameRoot) 'Portal'
+        if (Test-Path -LiteralPath (Join-Path $autoPortal 'portal\gameinfo.txt') -PathType Leaf) {
+            $PortalRoot = $autoPortal
+            Write-Host "Portal found automatically: $PortalRoot"
+        }
+        else {
+            $PortalRoot = Read-Host 'Enter the Portal root path, or leave blank to build without Portal 1'
+        }
+    }
+    if (-not [string]::IsNullOrWhiteSpace($PortalRoot)) {
+        $PortalRoot = Resolve-PortalRoot -Candidate $PortalRoot
+    }
+
     if ([string]::IsNullOrWhiteSpace($OutputRoot)) {
         $OutputRoot = Join-Path $ReleaseRoot 'game_cache'
     }
     $OutputRoot = [IO.Path]::GetFullPath($OutputRoot)
     $SrcengRoot = Join-Path $OutputRoot 'srceng'
 
-    if ($OutputRoot -eq $GameRoot -or $OutputRoot.StartsWith($GameRoot + '\', [StringComparison]::OrdinalIgnoreCase)) {
-        throw 'The output cache must not be inside the Half-Life 2 installation.'
+    if ($OutputRoot -eq $GameRoot -or $OutputRoot.StartsWith($GameRoot + '\', [StringComparison]::OrdinalIgnoreCase) -or
+        (-not [string]::IsNullOrWhiteSpace($PortalRoot) -and
+         ($OutputRoot -eq $PortalRoot -or $OutputRoot.StartsWith($PortalRoot + '\', [StringComparison]::OrdinalIgnoreCase)))) {
+        throw 'The output cache must not be inside a game installation.'
     }
     if ((Split-Path -Leaf $SrcengRoot) -ine 'srceng' -or
         (Split-Path -Parent $SrcengRoot) -ine $OutputRoot) {
@@ -231,6 +308,24 @@ try {
     }
     Invoke-RobocopyPackage -Source $platformSource -Destination (Join-Path $SrcengRoot 'platform') -ExcludedDirectories $platformExcluded
 
+    if (-not [string]::IsNullOrWhiteSpace($PortalRoot)) {
+        Write-Host 'Copying Portal 1 into the shared cache...'
+        foreach ($mapping in @(
+            @{ Source = 'portal'; Destination = 'portal' },
+            @{ Source = 'hl2'; Destination = 'portal_hl2' },
+            @{ Source = 'platform'; Destination = 'portal_platform' }
+        )) {
+            $portalSource = Join-Path $PortalRoot $mapping.Source
+            $excluded = @($commonExcluded | ForEach-Object { Join-Path $portalSource $_ })
+            if ($mapping.Source -ne 'platform') { $excluded += (Join-Path $portalSource 'custom') }
+            Invoke-RobocopyPackage -Source $portalSource `
+                -Destination (Join-Path $SrcengRoot $mapping.Destination) `
+                -ExcludedDirectories $excluded
+        }
+        Set-PortalGameInfo -GameInfo (Join-Path $SrcengRoot 'portal\gameinfo.txt')
+        $copiedCampaigns.Add('portal')
+    }
+
     Write-Host 'Applying HL2Q3VR resources...'
     Copy-Item -Path (Join-Path $OverlaySrceng '*') -Destination $SrcengRoot -Recurse -Force
     foreach ($campaign in $copiedCampaigns) {
@@ -245,6 +340,7 @@ try {
         campaigns = @($copiedCampaigns)
         lost_coast_supported = $true
         episodes_supported = $true
+        portal_supported = $copiedCampaigns.Contains('portal')
         generated_utc = [DateTime]::UtcNow.ToString('o')
         source_folder_name = Split-Path -Leaf $GameRoot
         file_count = @($files).Count

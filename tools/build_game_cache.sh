@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-PORT_VERSION="0.982"
+PORT_VERSION="0.985"
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 RELEASE_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd -P)"
 OVERLAY_ROOT="$RELEASE_ROOT/vr_game_resources"
@@ -33,6 +33,16 @@ resolve_game_root() {
         return
     fi
     die "Not a Half-Life 2 root: $candidate (expected hl2/gameinfo.txt and platform/)"
+}
+
+resolve_portal_root() {
+    local candidate="$1"
+    candidate="${candidate%\"}"
+    candidate="${candidate#\"}"
+    candidate="$(realpath -e -- "$candidate")" || die "Path does not exist: $candidate"
+    [[ -f "$candidate/portal/gameinfo.txt" && -d "$candidate/hl2" && -d "$candidate/platform" ]] ||
+        die "Not a Portal root: $candidate (expected portal/gameinfo.txt, hl2 and platform)"
+    printf '%s\n' "$candidate"
 }
 
 verify_overlay() {
@@ -121,7 +131,7 @@ need_command sed
 need_command awk
 
 printf 'Half-Life 2 VR Standalone %s\n' "$PORT_VERSION"
-printf 'The source must be a legal Half-Life 2 installation.\n\n'
+printf 'The sources must be legal Half-Life 2 and optional Portal installations.\n\n'
 
 GAME_ROOT="${1:-}"
 if [[ -z "$GAME_ROOT" ]]; then
@@ -129,12 +139,26 @@ if [[ -z "$GAME_ROOT" ]]; then
 fi
 GAME_ROOT="$(resolve_game_root "$GAME_ROOT")"
 
+PORTAL_ROOT="${3:-}"
+if [[ -z "$PORTAL_ROOT" && -f "$(dirname -- "$GAME_ROOT")/Portal/portal/gameinfo.txt" ]]; then
+    PORTAL_ROOT="$(dirname -- "$GAME_ROOT")/Portal"
+    printf 'Portal found automatically: %s\n' "$PORTAL_ROOT"
+elif [[ -z "$PORTAL_ROOT" ]]; then
+    read -r -p 'Enter the Portal root path, or leave blank to build without Portal 1: ' PORTAL_ROOT
+fi
+[[ -z "$PORTAL_ROOT" ]] || PORTAL_ROOT="$(resolve_portal_root "$PORTAL_ROOT")"
+
 OUTPUT_ROOT="${2:-$RELEASE_ROOT/game_cache}"
 OUTPUT_ROOT="$(realpath -m -- "$OUTPUT_ROOT")"
 SRCENG_ROOT="$OUTPUT_ROOT/srceng"
 case "$OUTPUT_ROOT/" in
     "$GAME_ROOT/"*) die "The output cache must not be inside the Half-Life 2 installation." ;;
 esac
+if [[ -n "$PORTAL_ROOT" ]]; then
+    case "$OUTPUT_ROOT/" in
+        "$PORTAL_ROOT/"*) die "The output cache must not be inside the Portal installation." ;;
+    esac
+fi
 [[ "$(basename -- "$SRCENG_ROOT")" == "srceng" && "$(dirname -- "$SRCENG_ROOT")" == "$OUTPUT_ROOT" ]] || die "Unsafe generated-cache path: $SRCENG_ROOT"
 
 verify_overlay
@@ -162,6 +186,53 @@ for campaign in lostcoast episodic ep2; do
     fi
 done
 
+if [[ -n "$PORTAL_ROOT" ]]; then
+    printf 'Copying Portal 1 into the shared cache...\n'
+    for mapping in 'portal:portal' 'hl2:portal_hl2' 'platform:portal_platform'; do
+        source_name="${mapping%%:*}"
+        destination_name="${mapping#*:}"
+        mkdir -p -- "$SRCENG_ROOT/$destination_name"
+        copy_game_tree "$PORTAL_ROOT/$source_name" "$SRCENG_ROOT/$destination_name" "$source_name"
+    done
+    cat > "$SRCENG_ROOT/portal/gameinfo.txt" <<'EOF'
+"GameInfo"
+{
+    game "Portal"
+    title "Portal"
+    type singleplayer_only
+    nodifficulty 1
+    hasportals 1
+    supportsvr 1
+    FileSystem
+    {
+        SteamAppId 400
+        SearchPaths
+        {
+            game+mod "portal/custom/*"
+            game "hl2/custom/*"
+            game+mod "portal/portal_sound_vo_russian.vpk"
+            game+mod "portal/portal_sound_vo_english.vpk"
+            game+mod "portal/portal_pak.vpk"
+            game "portal_hl2/hl2_textures.vpk"
+            game "portal_hl2/hl2_sound_vo_russian.vpk"
+            game "portal_hl2/hl2_sound_vo_english.vpk"
+            game "portal_hl2/hl2_sound_misc.vpk"
+            game "portal_hl2/hl2_misc.vpk"
+            platform "portal_platform/platform_misc.vpk"
+            mod+mod_write+default_write_path "|gameinfo_path|."
+            game+game_write "portal"
+            gamebin "portal/bin"
+            game "portal_hl2"
+            game "hl2"
+            platform "portal_platform"
+            platform "platform"
+        }
+    }
+}
+EOF
+    CAMPAIGNS+=(portal)
+fi
+
 printf 'Applying HL2Q3VR resources...\n'
 copy_overlay
 for campaign in "${CAMPAIGNS[@]}"; do
@@ -176,8 +247,8 @@ SOURCE_NAME="${SOURCE_NAME//\"/\\\"}"
 mkdir -p -- "$OUTPUT_ROOT"
 CAMPAIGNS_JSON="$(printf '"%s",' "${CAMPAIGNS[@]}")"
 CAMPAIGNS_JSON="[${CAMPAIGNS_JSON%,}]"
-printf '{\n  "format": 2,\n  "port": "HL2Q3VR",\n  "port_version": "%s",\n  "campaigns": %s,\n  "lost_coast_supported": true,\n  "episodes_supported": true,\n  "generated_utc": "%s",\n  "source_folder_name": "%s",\n  "file_count": %s,\n  "size_bytes": %s,\n  "headset_destination": "/sdcard/srceng"\n}\n' \
-    "$PORT_VERSION" "$CAMPAIGNS_JSON" "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" "$SOURCE_NAME" "$FILE_COUNT" "$SIZE_BYTES" \
+printf '{\n  "format": 2,\n  "port": "HL2Q3VR",\n  "port_version": "%s",\n  "campaigns": %s,\n  "lost_coast_supported": true,\n  "episodes_supported": true,\n  "portal_supported": %s,\n  "generated_utc": "%s",\n  "source_folder_name": "%s",\n  "file_count": %s,\n  "size_bytes": %s,\n  "headset_destination": "/sdcard/srceng"\n}\n' \
+    "$PORT_VERSION" "$CAMPAIGNS_JSON" "$([[ -n "$PORTAL_ROOT" ]] && printf true || printf false)" "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" "$SOURCE_NAME" "$FILE_COUNT" "$SIZE_BYTES" \
     > "$OUTPUT_ROOT/hl2q3vr-cache.json"
 
 printf '\nCache ready: %s\nQuest destination: /sdcard/srceng\n' "$SRCENG_ROOT"
