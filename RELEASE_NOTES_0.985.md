@@ -6,4 +6,4 @@
 - Windows and Linux cache builders can import a legal Portal installation into the shared cache.
 - Portal 2 is intentionally not displayed and is not included in the build.
 
-APK SHA-256: `81FCE84871A8EFC523CD5EF9A30344F3E7FF9F9BD6DD991BD87BC34348A378A7`
+APK SHA-256: `EAB9F49FA4DABC6EE6A1F1DE8E357E9C90E26733F85C48937564B77CFD00E50A`
