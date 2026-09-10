@@ -79,12 +79,15 @@ adb push game_cache/srceng /sdcard/
 /sdcard/srceng/lostcoast/  (только если установлен Lost Coast)
 /sdcard/srceng/episodic/   (только если установлен Episode One)
 /sdcard/srceng/ep2/        (только если установлен Episode Two)
+/sdcard/srceng/questvr/    (ресурсы совместимости Portal)
 /sdcard/srceng/portal/     (только если установлен Portal)
 /sdcard/srceng/portal_hl2/ (общие ресурсы из Portal)
 /sdcard/srceng/portal_platform/
 ```
 
 Запустите **Half-Life 2 VR Standalone** из раздела неизвестных источников, выберите кампанию в лаунчере и начните игру.
+
+Portal 1 использует гибридный режим рендера. Для Half-Life 2, Lost Coast и эпизодов режим «Турбо» остаётся доступен, но при выборе Portal он намеренно отключён.
 
 ## Управление
 

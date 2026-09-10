@@ -15,6 +15,8 @@ Current runtime overlay:
 - `hl2/materials/effects/hl2quest_rpg_laser.vmt` and `hl2/materials/sprites/vr_physcannon_*`
   — Quest-compatible weapon effects;
 - `hl2/custom/hl2quest_pcvr_menu/` — menu fonts and loose GameUI resources.
+- `questvr/shaders/fxc/` — the engine-compatible Portal shader cache; both cache builders
+  verify all 366 files and the hashes of the two shader families responsible for white materials.
 
 `supportsvr 1` is patched into the copied `hl2/gameinfo.txt` by the builder so the user's
 current file is preserved. Never place Valve VPKs, maps, voice files or saves here. Before a

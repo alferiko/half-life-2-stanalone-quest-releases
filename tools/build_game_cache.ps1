@@ -16,6 +16,10 @@ $ReleaseRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $OverlayRoot = Join-Path $ReleaseRoot 'vr_game_resources'
 $OverlaySrceng = Join-Path $OverlayRoot 'srceng'
 $OverlayManifest = Join-Path $OverlayRoot 'MANIFEST.sha256'
+$PortalShaderChecks = [ordered]@{
+    'lightmappedgeneric_ps20b.vcs' = 'CDA2ECA6656FB01E0CAD9CC5C95095C182EB9DC0901FC4EAF369C54EDEEF0055'
+    'vertexlit_and_unlit_generic_bump_ps20b.vcs' = '1C7602536287B87500ACB1720EE4EADCC6CA047AC35043C1F27E1764DA324205'
+}
 
 function Resolve-HL2Root {
     param([Parameter(Mandatory = $true)][string]$Candidate)
@@ -148,6 +152,29 @@ function Test-OverlayManifest {
     Write-Host "Verified VR resources: $verified files" -ForegroundColor Green
 }
 
+function Test-GeneratedPortalShaders {
+    param([Parameter(Mandatory = $true)][string]$SrcengRoot)
+
+    $shaderRoot = Join-Path $SrcengRoot 'questvr\shaders\fxc'
+    if (-not (Test-Path -LiteralPath $shaderRoot -PathType Container)) {
+        throw "Portal compatibility shader directory is missing: $shaderRoot"
+    }
+    $shaderCount = @(Get-ChildItem -LiteralPath $shaderRoot -File -Filter '*.vcs').Count
+    if ($shaderCount -ne 366) {
+        throw "Portal compatibility shader set is incomplete: expected 366 files, found $shaderCount"
+    }
+    foreach ($entry in $PortalShaderChecks.GetEnumerator()) {
+        $path = Join-Path $shaderRoot $entry.Key
+        if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+            throw "Required Portal compatibility shader is missing: $($entry.Key)"
+        }
+        if ((Get-Sha256 -Path $path) -ine $entry.Value) {
+            throw "Portal compatibility shader checksum mismatch: $($entry.Key)"
+        }
+    }
+    Write-Host "Verified Portal compatibility shaders: $shaderCount files" -ForegroundColor Green
+}
+
 function Enable-VRSupport {
     param([Parameter(Mandatory = $true)][string]$GameInfo)
 
@@ -195,6 +222,8 @@ function Set-PortalGameInfo {
         SearchPaths
         {
             game+mod "portal/custom/*"
+            game "questvr/custom/*"
+            game "questvr"
             game "hl2/custom/*"
             game+mod "portal/portal_sound_vo_russian.vpk"
             game+mod "portal/portal_sound_vo_english.vpk"
@@ -330,6 +359,9 @@ try {
     Copy-Item -Path (Join-Path $OverlaySrceng '*') -Destination $SrcengRoot -Recurse -Force
     foreach ($campaign in $copiedCampaigns) {
         Enable-VRSupport -GameInfo (Join-Path $SrcengRoot "$campaign\gameinfo.txt")
+    }
+    if ($copiedCampaigns.Contains('portal')) {
+        Test-GeneratedPortalShaders -SrcengRoot $SrcengRoot
     }
 
     $files = Get-ChildItem -LiteralPath $SrcengRoot -Recurse -File

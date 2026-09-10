@@ -67,6 +67,21 @@ verify_overlay() {
     printf 'Verified VR resources: %d files\n' "$verified"
 }
 
+verify_generated_portal_shaders() {
+    local shader_dir="$SRCENG_ROOT/questvr/shaders/fxc" count actual
+    [[ -d "$shader_dir" ]] || die "Portal compatibility shader directory is missing: $shader_dir"
+    count="$(find "$shader_dir" -maxdepth 1 -type f -name '*.vcs' -printf '.' | wc -c)"
+    [[ "$count" == 366 ]] || die "Portal compatibility shader set is incomplete: expected 366 files, found $count"
+
+    actual="$(sha256sum -- "$shader_dir/lightmappedgeneric_ps20b.vcs")"
+    [[ "${actual%% *}" == cda2eca6656fb01e0cad9cc5c95095c182eb9dc0901fc4eaf369c54edeef0055 ]] ||
+        die 'Portal compatibility shader checksum mismatch: lightmappedgeneric_ps20b.vcs'
+    actual="$(sha256sum -- "$shader_dir/vertexlit_and_unlit_generic_bump_ps20b.vcs")"
+    [[ "${actual%% *}" == 1c7602536287b87500acb1720ee4eadcc6ca047ac35043c1f27e1764da324205 ]] ||
+        die 'Portal compatibility shader checksum mismatch: vertexlit_and_unlit_generic_bump_ps20b.vcs'
+    printf 'Verified Portal compatibility shaders: %s files\n' "$count"
+}
+
 skip_file() {
     local name="${1##*/}"
     name="${name,,}"
@@ -209,6 +224,8 @@ if [[ -n "$PORTAL_ROOT" ]]; then
         SearchPaths
         {
             game+mod "portal/custom/*"
+            game "questvr/custom/*"
+            game "questvr"
             game "hl2/custom/*"
             game+mod "portal/portal_sound_vo_russian.vpk"
             game+mod "portal/portal_sound_vo_english.vpk"
@@ -238,6 +255,7 @@ copy_overlay
 for campaign in "${CAMPAIGNS[@]}"; do
     enable_vr_support "$SRCENG_ROOT/$campaign/gameinfo.txt"
 done
+[[ -z "$PORTAL_ROOT" ]] || verify_generated_portal_shaders
 
 FILE_COUNT="$(find "$SRCENG_ROOT" -type f -printf '.' | wc -c)"
 SIZE_BYTES="$(find "$SRCENG_ROOT" -type f -printf '%s\n' | awk '{ total += $1 } END { printf "%.0f", total }')"

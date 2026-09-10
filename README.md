@@ -79,12 +79,15 @@ The final headset layout must be:
 /sdcard/srceng/lostcoast/  (only when Lost Coast is installed)
 /sdcard/srceng/episodic/   (only when Episode One is installed)
 /sdcard/srceng/ep2/        (only when Episode Two is installed)
+/sdcard/srceng/questvr/    (Portal compatibility resources)
 /sdcard/srceng/portal/     (only when Portal is installed)
 /sdcard/srceng/portal_hl2/ (Portal-owned shared content)
 /sdcard/srceng/portal_platform/
 ```
 
 Start **Half-Life 2 VR Standalone** from the headset's Unknown Sources section. Select the campaign in the launcher and start the game.
+
+Portal 1 uses the Hybrid rendering mode. Turbo remains available for Half-Life 2, Lost Coast and the episodes, but is intentionally unavailable while Portal is selected.
 
 ## Controls
 
