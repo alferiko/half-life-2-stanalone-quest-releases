@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-PORT_VERSION="0.985"
+PORT_VERSION="0.986"
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 RELEASE_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd -P)"
 OVERLAY_ROOT="$RELEASE_ROOT/vr_game_resources"

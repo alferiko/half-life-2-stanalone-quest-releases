@@ -11,7 +11,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$PortVersion = '0.985'
+$PortVersion = '0.986'
 $ReleaseRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $OverlayRoot = Join-Path $ReleaseRoot 'vr_game_resources'
 $OverlaySrceng = Join-Path $OverlayRoot 'srceng'
@@ -249,7 +249,7 @@ function Set-PortalGameInfo {
 }
 
 try {
-    Write-Host 'Half-Life 2 VR Standalone 0.985' -ForegroundColor Yellow
+    Write-Host 'Half-Life 2 VR Standalone 0.986' -ForegroundColor Yellow
     Write-Host 'The sources must be legal Half-Life 2 and optional Portal installations.'
     Write-Host ''
 
