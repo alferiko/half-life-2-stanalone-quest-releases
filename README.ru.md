@@ -18,7 +18,7 @@
 
 Если вам нравится проект и вы хотите поддержать его развитие:
 
-- [DonationAlerts — zer0k0](https://www.donationalerts.com/r/zer0k0)
+- [Поддержать проект — zer0k0](https://dalink.to/zer0k0)
 - Ethereum: `0xB1BFE7788D172aDc4a9E3E80a1D2ad781c95ACff`
 
 ## Что потребуется

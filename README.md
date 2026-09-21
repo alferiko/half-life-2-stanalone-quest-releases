@@ -18,7 +18,7 @@ All code responsible for interaction with the VR world was written from scratch 
 
 If you enjoy the project and want to support its development:
 
-- [DonationAlerts — zer0k0](https://www.donationalerts.com/r/zer0k0)
+- [Support the project — zer0k0](https://dalink.to/zer0k0)
 - Ethereum: `0xB1BFE7788D172aDc4a9E3E80a1D2ad781c95ACff`
 
 ## What you need

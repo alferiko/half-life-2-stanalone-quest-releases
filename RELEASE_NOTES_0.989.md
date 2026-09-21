@@ -8,5 +8,6 @@
 - Half-Life 2, Lost Coast, Episode One, Episode Two and Portal 1 remain supported in one APK.
 - Portal 2 remains hidden and is not offered by the launcher or cache builder.
 - Fixed the complete distribution packaging so `vr_game_resources/MANIFEST.sha256` is always included and checked before cache generation.
+- Updated the launcher and documentation support link to `https://dalink.to/zer0k0`.
 
-APK SHA-256: `D4D150B3EEA6FB08693B927FB4DCD73194C263451536B144DB4112B58FC64A42`
+APK SHA-256: `C76AD09B54C586908E0D016B0037C714FF68E044A4C785A2483049CF87DE2EA6`
