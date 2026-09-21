@@ -11,7 +11,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$PortVersion = '0.988'
+$PortVersion = '0.989'
 $ReleaseRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $OverlayRoot = Join-Path $ReleaseRoot 'vr_game_resources'
 $OverlaySrceng = Join-Path $OverlayRoot 'srceng'
@@ -25,9 +25,6 @@ function Resolve-HL2Root {
     param([Parameter(Mandatory = $true)][string]$Candidate)
 
     $expanded = [Environment]::ExpandEnvironmentVariables($Candidate.Trim().Trim('"'))
-    if ([string]::IsNullOrWhiteSpace($expanded)) {
-        throw 'The Portal path is empty.'
-    }
     if ([string]::IsNullOrWhiteSpace($expanded)) {
         throw 'The Half-Life 2 path is empty.'
     }
@@ -249,7 +246,7 @@ function Set-PortalGameInfo {
 }
 
 try {
-    Write-Host 'Half-Life 2 VR Standalone 0.988' -ForegroundColor Yellow
+    Write-Host 'Half-Life 2 VR Standalone 0.989' -ForegroundColor Yellow
     Write-Host 'The sources must be legal Half-Life 2 and optional Portal installations.'
     Write-Host ''
 
