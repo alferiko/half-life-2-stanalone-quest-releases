@@ -1,97 +1,65 @@
-# Half-Life 2 VR Standalone for Meta Quest
+![Half-Life 2 and Portal 1 & 2 — Standalone VR for Meta Quest](docs/images/hl2quest-banner.png)
 
-[Русская версия](README.ru.md)
+# Half-Life 2 & Portal — Standalone VR
 
-**[Download the latest APK and release files](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest)**
+[Русская версия](README.ru.md) · **[Download the latest APK](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest)** · [What's new in 1.01](RELEASE_NOTES_1.01.md) · [Report an issue](https://github.com/alferiko/half-life-2-stanalone-quest-releases/issues)
 
-**Supported content:** Half-Life 2 · Lost Coast · Episode One · Episode Two · Portal 1 | **Headsets:** Meta Quest 3 · Meta Quest 3S
+An unofficial, free, non-commercial standalone VR adaptation for **Meta Quest 3 and Quest 3S**. One APK supports **Half-Life 2, Episode One, Episode Two, Lost Coast, Portal and Portal 2**. You must own the games on Steam; buying this port is not required.
 
-An unofficial, free and non-commercial standalone VR port for Meta Quest 3 and Quest 3S. Version 0.989 supports Half-Life 2, Lost Coast, Episode One, Episode Two and Portal 1 in one Android package. The original games are not included: you must own and install them legally on Steam.
+**Install the APK, then download your games from Steam in the headset launcher.** Current Steam content, including the Half-Life 2 Anniversary update, is supported. A pre-Anniversary/Legacy version is no longer required. A PC cache build is an optional fallback, not the normal installation process.
 
-The repository includes the Windows and Linux cache builders in `BUILD_GAME_CACHE.bat`, `BUILD_GAME_CACHE.sh` and `tools/`, plus the complete VR compatibility overlay in `vr_game_resources/`. The complete 0.989 archive includes the required `vr_game_resources/MANIFEST.sha256`; the builders verify all overlay files before creating the cache.
+## Contents
 
-## Original VR implementation
+- [Requirements](#requirements)
+- [Install and launch](#install-and-launch)
+- [Controls](#controls)
+- [Graphics and comfort](#graphics-and-comfort)
+- [Updates, saves and backups](#updates-saves-and-backups)
+- [Optional PC cache builder](#optional-pc-cache-builder)
+- [Troubleshooting](#troubleshooting)
+- [Sending logs and bug reports](#sending-logs-and-bug-reports)
+- [Credits and support](#credits-and-support)
 
-All code responsible for interaction with the VR world was written from scratch for this project. No code, VR logic or other resources from the PC VR version are used. The only exception is maps and models, which the cache builder takes from the user's legally installed copy of the game; they are not included in this repository or its releases.
+## Requirements
 
-## Support development
+- Meta Quest 3 or Quest 3S with Developer Mode enabled and Touch controllers.
+- A legal Steam account owning the games you want to play; install only the campaigns offered for your library.
+- Wi-Fi on the headset and enough free storage for game downloads, temporary installation files and prepared VR resources. The APK alone is about 752 MB; game content is additional.
+- A sideloading tool for the APK. The USB instructions below use a computer, a data cable and [Android Platform Tools](https://developer.android.com/tools/releases/platform-tools).
 
-If you enjoy the project and want to support its development:
+Games run locally on the headset. A gaming PC, PC VR streaming and a local Steam installation are not required for the built-in Steam download method.
 
-- [Support the project — zer0k0](https://dalink.to/zer0k0)
-- Ethereum: `0xB1BFE7788D172aDc4a9E3E80a1D2ad781c95ACff`
+## Install and launch
 
-## What you need
+### 1. Install the APK
 
-- Meta Quest 3 or Quest 3S with Developer Mode enabled;
-- a Windows 10/11 or Linux PC;
-- a USB data cable and authorized USB debugging;
-- Android SDK Platform Tools (`adb`), or another sideloading tool;
-- a legal Steam installation of Half-Life 2; install Episode One and Episode Two too if you want those campaigns;
-- a legal Steam installation of Portal if you want Portal 1;
-- the 0.989 APK from the release attachments; either clone this repository or download the complete distribution archive.
-
-## Installation
-
-### 1. Build the legal game cache
-
-1. Clone/download this repository to a writable folder, or extract `HL2VR-Standalone-0.989.7z`. Keep `BUILD_GAME_CACHE.*`, `tools/`, `vr_game_resources/` and `vr_game_resources/MANIFEST.sha256` together.
-2. From the repository/distribution root, run `BUILD_GAME_CACHE.bat` on Windows. On Linux run:
-
-   ```bash
-   bash BUILD_GAME_CACHE.sh
-   ```
-
-3. When asked, select the Half-Life 2 Steam Legacy root folder containing `hl2` and `platform`, for example:
-
-   ```text
-   D:\SteamLibrary\steamapps\common\Half-Life 2
-   ```
-
-4. If `lostcoast`, `episodic` and `ep2` are installed beside `hl2`, the builder includes them automatically. It also finds a sibling `Portal` Steam folder automatically or asks for it; leaving the Portal path blank skips that campaign. Everything is written to the single `game_cache/srceng` tree.
-
-The builder excludes executables, DLLs, saves, logs, personal configuration and every campaign's `custom` folder. It combines your legal game installation with the supplied VR compatibility resources. Python is not required. Linux needs Bash 4+ and GNU coreutils.
-
-### 2. Install the APK
-
-Connect the headset, accept its USB debugging prompt and check the connection:
+Download **`hl2quest-vr.apk`** from [Releases](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest). Connect the headset and accept its USB debugging prompt, then run:
 
 ```bash
 adb devices
-adb install -r HL2VR-Standalone-0.989.apk
+adb install -r hl2quest-vr.apk
 ```
 
-The `-r` option updates an existing installation without deleting its application data. If Android reports an incompatible signature, back up anything important, uninstall the older package, then install again.
+`-r` updates the existing app without uninstalling it. Start **Half-Life 2 VR Standalone** from the headset's **Unknown Sources** apps. Grant the storage permissions requested by the launcher so it can use `/sdcard/srceng`.
 
-### 3. Copy the game cache
+### 2. Download games inside the launcher
 
-Keep the complete `srceng` folder and copy it to shared storage:
+1. Choose the desired game and language in the launcher. For a campaign without installed data, use **Check cache** to open Steam sign-in.
+2. Sign in with the Steam account that owns the game. Complete Steam Guard in the phone app or enter the requested email/app code. The launcher does not save your password.
+3. Select one game or **Download all** from the supported games available in your library.
+4. Wait for downloading, file verification and VR resource preparation to finish. After selecting games, you can minimize the launcher; return to it if Steam Guard or another prompt needs attention.
+5. Select the campaign and press **Launch game**. Allow any first-launch resource preparation to complete. Later, use **Continue game** or the save manager.
 
-```bash
-adb push game_cache/srceng /sdcard/
-```
+Interrupted downloads retain downloaded files for a retry. Keep enough free space and avoid deleting the download folders while installation is running. Portal and Portal 2 can be installed separately from Half-Life 2.
 
-The final headset layout must be:
+### 3. First VR session
 
-```text
-/sdcard/srceng/hl2/
-/sdcard/srceng/platform/
-/sdcard/srceng/lostcoast/  (only when Lost Coast is installed)
-/sdcard/srceng/episodic/   (only when Episode One is installed)
-/sdcard/srceng/ep2/        (only when Episode Two is installed)
-/sdcard/srceng/questvr/    (Portal compatibility resources)
-/sdcard/srceng/portal/     (only when Portal is installed)
-/sdcard/srceng/portal_hl2/ (Portal-owned shared content)
-/sdcard/srceng/portal_platform/
-```
-
-Start **Half-Life 2 VR Standalone** from the headset's Unknown Sources section. Select the campaign in the launcher and start the game.
-
-Portal 1 uses the Hybrid rendering mode. Turbo remains available for Half-Life 2, Lost Coast and the episodes, but is intentionally unavailable while Portal is selected.
+Put on the headset and make sure both controllers are tracked. Set your leading hand and comfort options in **VR and controls**; use **Apply** where offered. For seated play, enable seated mode and hold **X+Y** to calibrate height and centre. Restart the game after changing launcher graphics or VR settings that apply on launch.
 
 ## Controls
 
-The table shows the default right-handed layout. Enable left-handed mode in the launcher to mirror weapon-hand actions.
+
+The table shows the default right-handed layout. Choose Left (mirrored) in the launcher to mirror weapon-hand actions. Custom button assignments override this table.
 
 | Touch controller input | Action |
 |---|---|
@@ -121,18 +89,97 @@ The table shows the default right-handed layout. Enable left-handed mode in the 
 - **Vehicles:** the optional alternative layout uses the physical left stick for throttle/brake, the right stick for steering and the non-dominant trigger for buggy boost.
 - **Room-scale movement:** optional and disabled by default; enable it in the launcher if you want real horizontal body motion to add locomotion.
 
-## Updating
+### Remapping and comfort
 
-Install a newer APK with `adb install -r`. Version 0.982 performs a one-time reset of launcher, game, graphics and VR settings to the new defaults; saves, installed game data and user mods are preserved. Rebuild and recopy the cache when the release notes say VR resources changed. The launcher's update check may also download the fixed-name APK and hand it to Android's package installer; confirm the system installation prompt to complete the update.
+In **VR and controls → Button layout**, A/B/X/Y and both stick clicks can be reassigned to jump, weapon selection, reload, flashlight, sprint, crouch or disabled. Menu inputs and calibration chords remain unchanged. Choose **Immersive** or **Comfortable** as a starting preset, then adjust individual options and apply them.
+
+Continuous locomotion and Blink teleport, smooth/snap turns, seated mode and physical crouch are configurable. Camera-based finger tracking is optional for HL2 and the episodes; it animates fingers while gameplay still uses the controllers.
+
+## Graphics and comfort
+
+Graphics settings are stored per campaign. **Hybrid (Vulkan)** is available for all six campaigns. **Classic (OpenGL)**, also called GLES/Turbo in development reports, is available for HL2, Lost Coast and the episodes; Portal and Portal 2 use Vulkan.
+
+Start with the supplied settings. If needed, reduce per-eye resolution or graphics quality and change one option at a time. Anniversary compatibility is enabled by default; **Smooth Anniversary lighting** can be disabled for performance without disabling content compatibility. Full campaign performance varies by scene and settings; the release smoke check is not a performance benchmark.
+
+## Updates, saves and backups
+
+Install the new APK over the existing version with `adb install -r hl2quest-vr.apk`, or use the launcher's update check and confirm Android's installer. Do not uninstall the app or clear its data as a routine update step. If Android reports a signature mismatch, keep the current installation and back up your data before troubleshooting.
+
+Existing game data does not need a blanket rebuild for 1.01: the launcher prepares the bundled VR resources. Save folders live at `/sdcard/srceng/<campaign>/save`, with campaign directories `hl2`, `episodic`, `ep2`, `lostcoast`, `portal` and `portal2`. Settings are also stored in each campaign's `cfg` folder and in the launcher.
+
+For a complete shared-storage backup, close the game and copy the tree to a new folder on your computer:
+
+```bash
+adb pull /sdcard/srceng ./HL2Quest-backup
+```
+
+This includes game data, saves, configs and mods, but not Android-private launcher preferences. A smaller backup can copy each installed campaign's `save` and `cfg` directories instead. Do not delete or replace the whole `srceng` tree to resolve a single issue. Save-file preservation during update does not guarantee every old save is compatible with changed game content.
+
+## Optional PC cache builder
+
+The existing **`BUILD_GAME_CACHE.bat` / `BUILD_GAME_CACHE.sh`** scripts remain an auxiliary way to prepare locally installed Steam content. They are the older **0.989 helper**, cover HL2/Lost Coast/episodes/Portal 1, and **do not build Portal 2 content**. They are not required by 1.01 and have not been revalidated against every current Steam depot. Prefer the built-in downloader, especially for Portal 2.
+
+If you need the helper:
+
+1. Clone/download this repository, keeping `BUILD_GAME_CACHE.*`, `tools/`, `vr_game_resources/` and `vr_game_resources/MANIFEST.sha256` together.
+2. Run `BUILD_GAME_CACHE.bat` on Windows, or `bash BUILD_GAME_CACHE.sh` on Linux (Bash 4+ and GNU coreutils).
+3. Select your legally installed Half-Life 2 root containing `hl2` and `platform`; optionally provide the Portal root. The helper detects installed episodes and Lost Coast. There is no requirement to switch Steam to a pre-Anniversary branch.
+4. Back up existing headset data before transferring the generated tree:
+
+   ```bash
+   adb push game_cache/srceng /sdcard/
+   ```
+
+5. Open the current launcher and allow its resource preparation to finish. If the older helper cannot process your installation, use Steam download in the launcher.
+
+The path must be `/sdcard/srceng/hl2` (or the chosen campaign), not `/sdcard/srceng/srceng/hl2`. This helper builds a **game-data cache**, not an APK.
 
 ## Troubleshooting
 
-- **`unauthorized` in `adb devices`:** put on the headset, accept the computer fingerprint, then reconnect USB.
-- **More than one device:** use `adb -s DEVICE_SERIAL ...` with the serial shown by `adb devices`.
-- **Game returns to the launcher or cannot find content:** verify that the path is exactly `/sdcard/srceng/hl2`, not `/sdcard/srceng/srceng/hl2`.
-- **A campaign is missing:** install it in Steam, run the cache builder again and verify that its `gameinfo.txt` exists in the generated cache. For Portal, supply the Steam `Portal` folder when prompted.
-- **Old files cause visual or startup issues:** rebuild a clean cache and replace `/sdcard/srceng` rather than merging directories by hand.
+- **`adb devices` says `unauthorized`:** put on the headset and accept the computer's USB debugging fingerprint. With several devices, add `-s DEVICE_SERIAL` after `adb`.
+- **Campaign not installed:** select it and use **Check cache**; confirm Steam ownership and finish the download. Do not copy only `gameinfo.txt` to make a campaign appear installed.
+- **Steam installation fails:** check free space, connection and Steam Guard, then retry. Include `steam-install-error.txt` with your report if it exists.
+- **Black screen or return to the launcher:** collect logs immediately, before repeated launches overwrite the engine log. Record the selected campaign and renderer. Try without user mods after backing up their configuration.
+- **Wrong height or floor:** check seated/standing mode and hold X+Y to recalibrate.
+- **Poor frame rate:** lower graphics settings or per-eye resolution; for HL2 content, compare Vulkan and Classic. Portal campaigns require Vulkan.
 
-## Legal notice
+## Sending logs and bug reports
 
-This project does not include commercial Half-Life 2 maps, VPKs, voices, saves or other game data. It is distributed free of charge for non-commercial use. Half-Life, Steam, Source and Meta Quest trademarks belong to their respective owners.
+### What to include
+
+Open a [GitHub issue](https://github.com/alferiko/half-life-2-stanalone-quest-releases/issues/new) or contact **antonregolitov@gmail.com** (also shown in the launcher's About page). Include:
+
+- APK version, Quest model and headset OS version;
+- game/campaign, map or chapter, renderer and important graphics/VR settings;
+- exact steps, expected result and what happened; whether it repeats;
+- whether content came from the launcher or PC helper, selected language and any mods;
+- logs, a screenshot/video, and a relevant save if needed to reproduce the issue.
+
+### Collect logs over USB
+
+Immediately after reproducing the issue, before launching another game:
+
+```bash
+adb pull /sdcard/srceng/engine.log ./engine.log
+adb logcat -d -v threadtime > logcat.txt
+adb logcat -d -b crash -v threadtime > crash.txt
+adb shell dumpsys activity exit-info com.valvesoftware.source.vrtest > exit-info.txt
+```
+
+For a Steam installation failure, also copy this file if present:
+
+```bash
+adb pull /sdcard/srceng/steam-install-error.txt ./steam-install-error.txt
+```
+
+If the problem happens before `engine.log` is created, send the other logs. For a fresh live capture, run `adb logcat -v threadtime > logcat-live.txt`, reproduce the problem, then press **Ctrl+C** on the computer. ZIP the text files and attach them to the report. Logs can contain device/account identifiers and activity from other apps: review them before posting publicly. Never include Steam passwords, Guard codes or session tokens.
+
+## Credits and support
+
+Included models, materials, icons and fonts belong to their respective authors. See [included-mod credits](RELEASE_NOTES_1.01.md#credits--авторы) for Juniez Weapons Pack, PortalGun HD Remake, Gordon and Chell models, icons and fonts. Thanks to Valve, nillerusr and contributors, hl2mp/d3d9-vr contributors, Volkolak, JersonGaming, Dynamic_, Just Jacob, LarrySBM, Khronos, Meta and community testers.
+
+[Support development on Patreon — zer0k0](https://www.patreon.com/cw/zer0k0)
+
+Ethereum: `0xefFcAc44B2dc16333745fAC2df39218BBE7e341F`
+
+This is an unofficial, non-commercial project, not affiliated with Valve or Meta. Commercial game depots must be obtained through your own Steam licences; the APK is not a replacement for buying the games. Half-Life, Portal, Steam, Source and Meta Quest trademarks belong to their respective owners.
