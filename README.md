@@ -1,10 +1,10 @@
 ![Half-Life 2 and Portal 1 & 2 — Standalone VR for Meta Quest](docs/images/hl2quest-banner.png)
 
-# Half-Life 2 & Portal — Standalone VR
+# HL2Quest — Half-Life 2, Portal & Portal 2 VR for Meta Quest
 
 [Русская версия](README.ru.md) · **[Download the latest APK](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest)** · [What's new in 1.01](RELEASE_NOTES_1.01.md) · [Report an issue](https://github.com/alferiko/half-life-2-stanalone-quest-releases/issues)
 
-An unofficial, free, non-commercial standalone VR adaptation for **Meta Quest 3 and Quest 3S**. One APK supports **Half-Life 2, Episode One, Episode Two, Lost Coast, Portal and Portal 2**. You must own the games on Steam; buying this port is not required.
+**HL2Quest** brings **Half-Life 2 VR, Portal VR and Portal 2 VR** to **Meta Quest 3 and Quest 3S** as an unofficial, free, non-commercial standalone Android app. One APK includes support for **Half-Life 2, Episode One, Episode Two, Lost Coast, Portal and Portal 2**. You must own the games on Steam; buying this port is not required.
 
 **Install the APK, then download your games from Steam in the headset launcher.** Current Steam content, including the Half-Life 2 Anniversary update, is supported. A pre-Anniversary/Legacy version is no longer required. A PC cache build is an optional fallback, not the normal installation process.
 
@@ -18,6 +18,7 @@ An unofficial, free, non-commercial standalone VR adaptation for **Meta Quest 3 
 - [Optional PC cache builder](#optional-pc-cache-builder)
 - [Troubleshooting](#troubleshooting)
 - [Sending logs and bug reports](#sending-logs-and-bug-reports)
+- [Frequently asked questions](#frequently-asked-questions)
 - [Credits and support](#credits-and-support)
 
 ## Requirements
@@ -177,6 +178,24 @@ adb pull /sdcard/srceng/steam-install-error.txt ./steam-install-error.txt
 ```
 
 If the problem happens before `engine.log` is created, send the other logs. For a fresh live capture, run `adb logcat -v threadtime > logcat-live.txt`, reproduce the problem, then press **Ctrl+C** on the computer. ZIP the text files and attach them to the report. Logs can contain device/account identifiers and activity from other apps: review them before posting publicly. Never include Steam passwords, Guard codes or session tokens.
+
+## Frequently asked questions
+
+### Can I play Half-Life 2 VR on Quest without a gaming PC?
+
+Yes. HL2Quest runs the game on Quest 3 or Quest 3S. Install the Android APK using a sideloading tool, then download your owned Steam games in the headset launcher. No PC VR streaming is involved. See [install and launch](#install-and-launch).
+
+### Can I play Portal 2 in standalone VR? Do I need Half-Life 2 installed?
+
+Portal 2 is supported in the same APK and can be installed independently of Half-Life 2. Portal 1 can also be installed separately. You need the corresponding game in your Steam library; both Portal campaigns use Vulkan.
+
+### Does HL2Quest require Half-Life 2 Legacy or a pre-Anniversary version?
+
+No. Version 1.01 supports current Steam content, including the Half-Life 2 Anniversary update. The launcher downloads the current game data and prepares the VR resources automatically.
+
+### Is HL2Quest free, and does the APK include the original games?
+
+The port is free and non-commercial. The APK supplies the port and bundled VR resources; the commercial game depots come from your own Steam licences. Download the APK only from the project's [GitHub releases](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest).
 
 ## Credits and support
 
