@@ -66,8 +66,8 @@ The table shows the default right-handed layout. Choose Left (mirrored) in the l
 | Left thumbstick | Move; forward direction follows horizontal head direction |
 | Right thumbstick | Turn/look; smooth or snap turning is selectable in the launcher |
 | Dominant-hand trigger (right by default) | Fire; point and select in menus |
-| Support-hand trigger | Context action: mounted-gun fire or buggy boost with alternative vehicle controls |
-| Either grip | Grab/use with that hand; the dominant grip also provides weapon-specific alternate actions |
+| Support-hand trigger | Orange portal with the portal gun; mounted-gun fire or buggy boost with alternative vehicle controls |
+| Either grip | Grab/use with a free hand; the dominant grip provides weapon-specific actions while holding a weapon |
 | A | Jump; confirm in menus |
 | B | Tap/hold weapon selection; back in menus |
 | X | Reload; eject magazine/ammunition during physical reload |
@@ -88,6 +88,10 @@ The table shows the default right-handed layout. Choose Left (mirrored) in the l
 - **Mounted guns:** grab the handles, fire with either trigger and release either grip to let go.
 - **Vehicles:** the optional alternative layout uses the physical left stick for throttle/brake, the right stick for steering and the non-dominant trigger for buggy boost.
 - **Room-scale movement:** optional and disabled by default; enable it in the launcher if you want real horizontal body motion to add locomotion.
+
+### Portal and Portal 2
+
+With the portal gun, the **leading-hand trigger fires the blue portal** and the **support-hand trigger fires the orange portal**, once the corresponding portal is available in the story. Both grips remain available for grabbing/using objects. The HL2 double-grip alternate-fire gesture does not fire the orange portal.
 
 ### Remapping and comfort
 
