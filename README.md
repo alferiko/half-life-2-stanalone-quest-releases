@@ -122,22 +122,24 @@ This includes game data, saves, configs and mods, but not Android-private launch
 
 ## Optional PC cache builder
 
-The existing **`BUILD_GAME_CACHE.bat` / `BUILD_GAME_CACHE.sh`** scripts remain an auxiliary way to prepare locally installed Steam content. They are the older **0.989 helper**, cover HL2/Lost Coast/episodes/Portal 1, and **do not build Portal 2 content**. They are not required by 1.01 and have not been revalidated against every current Steam depot. Prefer the built-in downloader, especially for Portal 2.
+Use **`BUILD_GAME_CACHE.bat`** (Windows) or **`BUILD_GAME_CACHE.sh`** (Linux) to prepare a cache from your owned, installed **current PC versions of Half-Life 2, Portal and Portal 2**. HL2 includes installed episodes and Lost Coast; Portal 2 includes its DLC, `update` content and installed localization folders. Each game can be selected independently.
 
-If you need the helper:
+This remains an alternative to the primary in-headset Steam download method. It requires **Python 3.10+** (standard library only, no pip packages) and **the official 1.01 release APK**. The helper takes the matching base VR resources from that APK, verifies their hashes and does not use the old `vr_game_resources/` overlay.
 
-1. Clone/download this repository, keeping `BUILD_GAME_CACHE.*`, `tools/`, `vr_game_resources/` and `vr_game_resources/MANIFEST.sha256` together.
-2. Run `BUILD_GAME_CACHE.bat` on Windows, or `bash BUILD_GAME_CACHE.sh` on Linux (Bash 4+ and GNU coreutils).
-3. Select your legally installed Half-Life 2 root containing `hl2` and `platform`; optionally provide the Portal root. The helper detects installed episodes and Lost Coast. There is no requirement to switch Steam to a pre-Anniversary branch.
-4. Back up existing headset data before transferring the generated tree:
+1. Download the [current repository ZIP](https://github.com/alferiko/half-life-2-stanalone-quest-releases/archive/refs/heads/main.zip), extract it and download `hl2quest-vr.apk`. Place the APK next to `BUILD_GAME_CACHE.*`, or supply its path.
+2. Run `BUILD_GAME_CACHE.bat` on Windows or `bash BUILD_GAME_CACHE.sh` on Linux. Choose game folders, a **new** output folder and voice language. Detected Steam library paths are offered; enter `-` to skip a game.
+3. Wait for copying, VPK completeness checks and SHA-256 verification. Existing output folders are refused, not deleted or merged. Saves, user configs, `custom` mods, Workshop content and desktop binaries are excluded.
+4. Back up existing headset data, then copy the generated `srceng` folder:
 
    ```bash
    adb push game_cache/srceng /sdcard/
    ```
 
-5. Open the current launcher and allow its resource preparation to finish. If the older helper cannot process your installation, use Steam download in the launcher.
+5. Open the **1.01 launcher** and wait for its automatic preparation of versioned VR resources (weapons, bodies, compatibility shaders and UI). No Steam login is required for this local cache. Choose the campaign and launch it.
 
-The path must be `/sdcard/srceng/hl2` (or the chosen campaign), not `/sdcard/srceng/srceng/hl2`. This helper builds a **game-data cache**, not an APK.
+The correct headset path is `/sdcard/srceng/<campaign>`. Do not copy the enclosing `game_cache` directory or launch the engine directly before launcher preparation. This helper builds **game data, not an APK**. It copies the versions and languages installed on the PC; it does not download missing Steam files or verify Steam ownership.
+
+[Command-line options, safety behavior and examples](docs/CACHE_BUILDER.md). The builder supports current Anniversary content; no Legacy downgrade is required.
 
 ## Troubleshooting
 

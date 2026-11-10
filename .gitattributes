@@ -1,0 +1,6 @@
+BUILD_GAME_CACHE.sh text eol=lf
+tools/*.sh text eol=lf
+tools/*.py text eol=lf
+tests/*.py text eol=lf
+BUILD_GAME_CACHE.bat text eol=crlf
+tools/*.ps1 text eol=crlf

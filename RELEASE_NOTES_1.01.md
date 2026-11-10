@@ -4,9 +4,11 @@ Meta Quest 3 / Quest 3S · Half-Life 2 · Episode One · Episode Two · Lost Coa
 
 ## Install / Установка
 
-Download **hl2quest-vr.apk** below and install over your existing version. Sign in to Steam in the headset launcher to download the games you own. **Current Steam / Anniversary content is supported; pre-Anniversary / Legacy is no longer required.** PC cache scripts are an optional older helper, not the primary installation method.
+Download **hl2quest-vr.apk** below and install over your existing version. Sign in to Steam in the headset launcher to download the games you own. **Current Steam / Anniversary content is supported; pre-Anniversary / Legacy is no longer required.** The updated PC cache helper also supports Portal 2 and current local Steam installs (Python 3.10+ and this APK required); it remains an optional alternative to the launcher.
 
-Скачайте **hl2quest-vr.apk** ниже и установите поверх текущей версии. Для установки принадлежащих вам игр войдите в Steam в лаунчере на шлеме. **Поддерживается актуальный контент Steam / Anniversary; версия до Anniversary / Legacy больше не нужна.** Скрипты кеша на ПК — дополнительный старый инструмент, а не основной способ установки.
+Скачайте **hl2quest-vr.apk** ниже и установите поверх текущей версии. Для установки принадлежащих вам игр войдите в Steam в лаунчере на шлеме. **Поддерживается актуальный контент Steam / Anniversary; версия до Anniversary / Legacy больше не нужна.** Обновлённый сборщик кеша на ПК также поддерживает Portal 2 и актуальные локальные Steam-установки (нужны Python 3.10+ и этот APK); он остаётся дополнительным вариантом установки.
+
+[Updated PC cache helper / Обновлённый сборщик кеша](https://github.com/alferiko/half-life-2-stanalone-quest-releases/blob/main/docs/CACHE_BUILDER.md) · [Current scripts ZIP / Актуальные скрипты](https://github.com/alferiko/half-life-2-stanalone-quest-releases/archive/refs/heads/main.zip)
 
 ```bash
 adb install -r hl2quest-vr.apk

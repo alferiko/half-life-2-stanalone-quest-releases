@@ -1,9 +1,11 @@
-# Game-cache overlay
+# Legacy game-cache overlay (0.989)
+
+The current 1.01 PC cache builder does **not** read this directory or its manifest. It restores the matching base overlay directly from the official release APK; the launcher prepares additional versioned resources. See [the current cache guide](../docs/CACHE_BUILDER.md). The notes below describe the older helper.
 
 Only files maintained by HL2Q3VR belong under `srceng/`. The cache builder merges them after
 copying a user's legal Half-Life 2 installation. Paths must match the final headset layout.
 
-Current runtime overlay:
+Historical runtime overlay:
 
 - `hl2/cfg/sourcevr_hl2.cfg` — synchronous material queue and VR defaults;
 - `hl2/materials/vgui/inworldui*.vmt` — materials for menu and intro render targets;

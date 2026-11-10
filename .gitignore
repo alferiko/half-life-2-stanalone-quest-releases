@@ -1,4 +1,6 @@
 /game_cache/
+/.game_cache.building-*/
+__pycache__/
 /srceng/
 /release-assets/
 *.7z
