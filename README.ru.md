@@ -2,7 +2,9 @@
 
 # HL2Quest — Half-Life 2, Portal и Portal 2 в VR для Meta Quest
 
-[English version](README.md) · **[Скачать актуальный APK](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest)** · [Что нового в 1.01](RELEASE_NOTES_1.01.md) · [Сообщить о проблеме](https://github.com/alferiko/half-life-2-stanalone-quest-releases/issues)
+[English version](README.md) · **[Скачать актуальный APK](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest)** · [Что нового в 1.02](RELEASE_NOTES_1.02.md#русский) · [Сообщить о проблеме](https://github.com/alferiko/half-life-2-stanalone-quest-releases/issues)
+
+**1.02 — исправление загрузки из Steam:** при временной ошибке DNS на Android загрузчик повторяет запрос. Обновляйте поверх своей редакции приложения; кеш и скачанные части файлов можно использовать повторно. [Подробности и инструкция](RELEASE_NOTES_1.02.md#русский).
 
 **HL2Quest** — неофициальная бесплатная некоммерческая адаптация **Half-Life 2 VR, Portal VR и Portal 2 VR** для автономной игры на **Meta Quest 3 и Quest 3S**. Один Android APK поддерживает **Half-Life 2, Episode One, Episode Two, Lost Coast, Portal и Portal 2**. Игры должны быть приобретены в Steam; покупать сам порт не нужно.
 
@@ -121,6 +123,8 @@ adb pull /sdcard/srceng ./HL2Quest-backup
 В копию попадут игровой кеш, сохранения, конфиги и моды, но не закрытые Android-настройки лаунчера. Для меньшей копии отдельно сохраните `save` и `cfg` каждой установленной кампании. Не удаляйте и не заменяйте весь `srceng` ради исправления одной ошибки. Сохранность файлов при обновлении не гарантирует совместимость любого старого сохранения с изменёнными игровыми ресурсами.
 
 ## Вспомогательный сборщик кеша на ПК
+
+Полный архив ниже остаётся версии **1.01** и совместим с **1.02**, но содержит старый APK. Замените вложенный `hl2quest-vr.apk` на [APK 1.02](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/download/1.02/hl2quest-vr.apk) перед установкой на шлем. Готовый кеш пересобирать не нужно. [Исправление Steam-загрузки и обновление до 1.02](RELEASE_NOTES_1.02.md#русский).
 
 **`BUILD_GAME_CACHE.bat`** (Windows) и **`BUILD_GAME_CACHE.sh`** (Linux) собирают кеш из ваших легальных **актуальных ПК-установок Half-Life 2, Portal и Portal 2**. Для HL2 включаются установленные эпизоды и Lost Coast; для Portal 2 — DLC, каталог `update` и установленные локализации. Каждую игру можно выбрать отдельно.
 

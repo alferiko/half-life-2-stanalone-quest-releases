@@ -4,6 +4,8 @@
 
 ## Start with the complete archive
 
+**Update for release 1.02:** the Full archive is still 1.01 and remains compatible. Replace its `hl2quest-vr.apk` with the [1.02 APK](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/download/1.02/hl2quest-vr.apk) to include the Steam DNS download fix when installing on the headset. The game/VR resources are unchanged and existing caches do not need rebuilding. [Release notes](../RELEASE_NOTES_1.02.md).
+
 **[Download HL2Quest-Cache-Builder-1.01-Full.zip — 752 MB](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/download/1.01/HL2Quest-Cache-Builder-1.01-Full.zip)** · [SHA-256 checksum](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/download/1.01/HL2Quest-Cache-Builder-1.01-Full.zip.sha256) · [Пошагово на русском](#полный-архив-пошагово)
 
 The Full archive includes the scripts, guide, and **official `hl2quest-vr.apk` with its bundled VR resources**. There is no separate resource pack to download or unpack. Python, Android Platform Tools and your Steam game installations are separate prerequisites. The small script-only ZIP and GitHub's source ZIP do not include the APK.
@@ -132,6 +134,8 @@ Open **Half-Life 2 VR Standalone** in Unknown Sources, grant storage access, sel
 The included APK is the **regular GitHub edition**. If you use [SideQuest Edition 1.01](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/tag/1.01-sidequest), keep that edition installed and skip the regular APK installation above: the same cache works with it. Open **HL2Quest (SideQuest)** to prepare resources. Its package is separate, so installing the included regular APK would add a second app rather than update the SideQuest app. Do not run both editions or their installers at the same time.
 
 ## Полный архив: пошагово
+
+**Для релиза 1.02:** Full-архив по-прежнему содержит APK 1.01. После распаковки замените его новым [hl2quest-vr.apk 1.02](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/download/1.02/hl2quest-vr.apk) с исправлением Steam-загрузки. Скрипты и ресурсы совместимы; уже готовый кеш пересобирать не нужно. Для SideQuest устанавливайте отдельный [APK SideQuest 1.02](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/tag/1.02-sidequest).
 
 1. Скачайте **[HL2Quest-Cache-Builder-1.01-Full.zip — 752 МБ](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/download/1.01/HL2Quest-Cache-Builder-1.01-Full.zip)** и распакуйте **весь** архив. Откройте полученную папку `HL2Quest-Cache-Builder-1.01-Full`. Не запускайте BAT из окна архиватора и не переносите его отдельно от `tools`.
 2. Установите **Python 3.10+**. В Windows включите Python Launcher/добавление в PATH при установке и заново откройте терминал. Пакеты pip не нужны. Python в Full-архив не входит.

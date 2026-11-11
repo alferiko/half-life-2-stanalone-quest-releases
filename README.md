@@ -2,7 +2,9 @@
 
 # HL2Quest — Half-Life 2, Portal & Portal 2 VR for Meta Quest
 
-[Русская версия](README.ru.md) · **[Download the latest APK](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest)** · [What's new in 1.01](RELEASE_NOTES_1.01.md) · [Report an issue](https://github.com/alferiko/half-life-2-stanalone-quest-releases/issues)
+[Русская версия](README.ru.md) · **[Download the latest APK](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest)** · [What's new in 1.02](RELEASE_NOTES_1.02.md) · [Report an issue](https://github.com/alferiko/half-life-2-stanalone-quest-releases/issues)
+
+**1.02 Steam download hotfix:** temporary Android DNS failures now use the download retry path. Update over your current edition; existing cache and partial downloads can be reused. [Release notes and update instructions](RELEASE_NOTES_1.02.md).
 
 **HL2Quest** brings **Half-Life 2 VR, Portal VR and Portal 2 VR** to **Meta Quest 3 and Quest 3S** as an unofficial, free, non-commercial standalone Android app. One APK includes support for **Half-Life 2, Episode One, Episode Two, Lost Coast, Portal and Portal 2**. You must own the games on Steam; buying this port is not required.
 
@@ -121,6 +123,8 @@ adb pull /sdcard/srceng ./HL2Quest-backup
 This includes game data, saves, configs and mods, but not Android-private launcher preferences. A smaller backup can copy each installed campaign's `save` and `cfg` directories instead. Do not delete or replace the whole `srceng` tree to resolve a single issue. Save-file preservation during update does not guarantee every old save is compatible with changed game content.
 
 ## Optional PC cache builder
+
+The Full archive below remains version **1.01**. It is compatible with **1.02**, but its included APK is older: replace `hl2quest-vr.apk` with the [1.02 APK](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/download/1.02/hl2quest-vr.apk) before following the installation steps. Existing caches do not need rebuilding.
 
 Use **`BUILD_GAME_CACHE.bat`** (Windows) or **`BUILD_GAME_CACHE.sh`** (Linux) to prepare a cache from your owned, installed **current PC versions of Half-Life 2, Portal and Portal 2**. HL2 includes installed episodes and Lost Coast; Portal 2 includes its DLC, `update` content and installed localization folders. Each game can be selected independently.
 
