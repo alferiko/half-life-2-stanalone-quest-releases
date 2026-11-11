@@ -126,7 +126,7 @@ Use **`BUILD_GAME_CACHE.bat`** (Windows) or **`BUILD_GAME_CACHE.sh`** (Linux) to
 
 This remains an alternative to the primary in-headset Steam download method. It requires **Python 3.10+** (standard library only, no pip packages) and **the official 1.01 release APK**. The helper takes the matching base VR resources from that APK, verifies their hashes and does not use the old `vr_game_resources/` overlay.
 
-1. Download the [current repository ZIP](https://github.com/alferiko/half-life-2-stanalone-quest-releases/archive/refs/heads/main.zip), extract it and download `hl2quest-vr.apk`. Place the APK next to `BUILD_GAME_CACHE.*`, or supply its path.
+1. Download the **[complete cache-builder archive — 752 MB](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/download/1.01/HL2Quest-Cache-Builder-1.01-Full.zip)**. Extract the entire ZIP, then open its `HL2Quest-Cache-Builder-1.01-Full` folder. It already contains **`hl2quest-vr.apk` and all bundled VR resources**; no separate resource download or APK extraction is needed. Keep the APK beside the scripts and preserve the `tools` folder. Install Python 3.10+ separately; Python and Steam game data are not included.
 2. Run `BUILD_GAME_CACHE.bat` on Windows or `bash BUILD_GAME_CACHE.sh` on Linux. Choose game folders, a **new** output folder and voice language. Detected Steam library paths are offered; enter `-` to skip a game.
 3. Wait for copying, VPK completeness checks and SHA-256 verification. Existing output folders are refused, not deleted or merged. Saves, user configs, `custom` mods, Workshop content and desktop binaries are excluded.
 4. Back up existing headset data, then copy the generated `srceng` folder:
@@ -135,11 +135,11 @@ This remains an alternative to the primary in-headset Steam download method. It 
    adb push game_cache/srceng /sdcard/
    ```
 
-5. Open the **1.01 launcher** and wait for its automatic preparation of versioned VR resources (weapons, bodies, compatibility shaders and UI). No Steam login is required for this local cache. Choose the campaign and launch it.
+5. If needed, install/update the included APK with `adb install -r hl2quest-vr.apk`. Open the **1.01 launcher**, grant storage access and wait for its automatic preparation of versioned VR resources (weapons, bodies, compatibility shaders and UI). No Steam login is required for this local cache. Choose the campaign and launch it.
 
 The correct headset path is `/sdcard/srceng/<campaign>`. Do not copy the enclosing `game_cache` directory or launch the engine directly before launcher preparation. This helper builds **game data, not an APK**. It copies the versions and languages installed on the PC; it does not download missing Steam files or verify Steam ownership.
 
-[Command-line options, safety behavior and examples](docs/CACHE_BUILDER.md). The builder supports current Anniversary content; no Legacy downgrade is required.
+[Full-archive setup, command-line examples and troubleshooting](docs/CACHE_BUILDER.md). At the APK prompt, press Enter to use the included file; at the language prompt, enter `english`, `russian` or another installed Steam language. The builder supports current Anniversary content; no Legacy downgrade is required. The small script-only archive and GitHub's source ZIP do **not** include the APK/resources.
 
 ## Troubleshooting
 
