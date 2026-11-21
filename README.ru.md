@@ -2,9 +2,9 @@
 
 # HL2Quest — Half-Life 2, Portal и Portal 2 в VR для Meta Quest
 
-[English version](README.md) · **[Скачать актуальный APK](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest)** · [Что нового в 1.03](RELEASE_NOTES_1.03.md#русский) · [Сообщить о проблеме](https://github.com/alferiko/half-life-2-stanalone-quest-releases/issues)
+[English version](README.md) · **[Скачать актуальный APK](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest)** · [Что нового в 1.03.1](RELEASE_NOTES_1.03.1.md#русский) · [Сообщить о проблеме](https://github.com/alferiko/half-life-2-stanalone-quest-releases/issues)
 
-**Вышла версия 1.03:** исправления кеша Steam и Steam Guard, экспорт логов, ZIP-копии сохранений, улучшения VR-рук и порталов, нажатие кнопок руками. [Патчноут](RELEASE_NOTES_1.03.md#русский).
+**Вышла версия 1.03.1:** исправлены клиентские проверки столкновений через порталы; лаунчер обнаруживает хотфикс как обновление с 1.03 (versionCode 1031). Все улучшения 1.03 сохранены. [Патчноут](RELEASE_NOTES_1.03.1.md#русский).
 
 **HL2Quest** — неофициальная бесплатная некоммерческая адаптация **Half-Life 2 VR, Portal VR и Portal 2 VR** для автономной игры на **Meta Quest 3 и Quest 3S**. Один Android APK поддерживает **Half-Life 2, Episode One, Episode Two, Lost Coast, Portal и Portal 2**. Игры должны быть приобретены в Steam; покупать сам порт не нужно.
 
@@ -36,11 +36,11 @@
 
 ### 1. Установите APK
 
-Скачайте **`HL2VR-Standalone-1.03.apk`** из [Releases](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest). Подключите шлем, подтвердите в нём USB-отладку и выполните:
+Скачайте **`HL2VR-Standalone-1.03.1.apk`** из [Releases](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/latest). Подключите шлем, подтвердите в нём USB-отладку и выполните:
 
 ```bash
 adb devices
-adb install -r HL2VR-Standalone-1.03.apk
+adb install -r HL2VR-Standalone-1.03.1.apk
 ```
 
 Ключ `-r` обновляет приложение поверх установленной версии. Откройте **Half-Life 2 VR Standalone** в разделе **неизвестных источников** на шлеме. Предоставьте запрошенный лаунчером доступ к файлам для работы с `/sdcard/srceng`.
@@ -110,7 +110,7 @@ adb install -r HL2VR-Standalone-1.03.apk
 
 ## Обновление, сохранения и резервные копии
 
-Устанавливайте новый APK поверх старого командой `adb install -r HL2VR-Standalone-1.03.apk` либо через проверку обновлений лаунчера с подтверждением в установщике Android. Для обычного обновления не нужно удалять приложение или очищать его данные. При ошибке несовместимой подписи сохраните текущую установку и сделайте резервную копию перед дальнейшими действиями.
+Устанавливайте новый APK поверх старого командой `adb install -r HL2VR-Standalone-1.03.1.apk` либо через проверку обновлений лаунчера с подтверждением в установщике Android. Для обычного обновления не нужно удалять приложение или очищать его данные. При ошибке несовместимой подписи сохраните текущую установку и сделайте резервную копию перед дальнейшими действиями.
 
 Для перехода на 1.01 не нужна обязательная полная пересборка имеющегося кеша: лаунчер подготавливает включённые VR-ресурсы. Сохранения находятся в `/sdcard/srceng/<кампания>/save`; каталоги кампаний: `hl2`, `episodic`, `ep2`, `lostcoast`, `portal`, `portal2`. Настройки также хранятся в `cfg` соответствующей кампании и в лаунчере.
 
@@ -124,7 +124,7 @@ adb pull /sdcard/srceng ./HL2Quest-backup
 
 ## Вспомогательный сборщик кеша на ПК
 
-Полный архив ниже остаётся версии **1.01** и совместим с **1.03**, но содержит старый APK. Замените вложенный `hl2quest-vr.apk` на [APK 1.03](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/download/1.03/HL2VR-Standalone-1.03.apk) и переименуйте его в `hl2quest-vr.apk` перед установкой на шлем. Сохраняйте игровые данные: новые VR-ресурсы подготовит лаунчер. [Патчноут и обновление до 1.03](RELEASE_NOTES_1.03.md#русский).
+Полный архив ниже остаётся версии **1.01** и совместим с **1.03.1**, но содержит старый APK. Замените вложенный `hl2quest-vr.apk` на [APK 1.03.1](https://github.com/alferiko/half-life-2-stanalone-quest-releases/releases/download/1.03.1/HL2VR-Standalone-1.03.1.apk) и переименуйте его в `hl2quest-vr.apk` перед установкой на шлем. Сохраняйте игровые данные: новые VR-ресурсы подготовит лаунчер. [Патчноут и обновление до 1.03.1](RELEASE_NOTES_1.03.1.md#русский).
 
 **`BUILD_GAME_CACHE.bat`** (Windows) и **`BUILD_GAME_CACHE.sh`** (Linux) собирают кеш из ваших легальных **актуальных ПК-установок Half-Life 2, Portal и Portal 2**. Для HL2 включаются установленные эпизоды и Lost Coast; для Portal 2 — DLC, каталог `update` и установленные локализации. Каждую игру можно выбрать отдельно.
 
